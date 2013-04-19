@@ -1,0 +1,19 @@
+{
+    "version": "0.1",
+    "name": "Chords",
+    "description": "Easily find guitar chords",
+    "launch_path": "/index.html",
+    "icons": {
+        "16": "/img/icons/mortar-16.png",
+        "48": "/img/icons/mortar-48.png",
+        "128": "/img/icons/mortar-128.png"
+    },
+    "developer": {
+        "name": "Sergi Mansilla",
+        "url": "http://sergimansilla.com"
+    },
+    "installs_allowed_from": ["*"],
+    "default_locale": "en",
+    "permissions": {
+    }
+}

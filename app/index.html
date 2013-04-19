@@ -1,0 +1,75 @@
+<!doctype html>
+<html class="no-js" ng-app="chordsApp">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- Stable Building blocks -->
+  <link rel="stylesheet" type="text/css" href="styles/shared/headers.css">
+  <link rel="stylesheet" type="text/css" href="styles/shared/edit_mode.css">
+  <!--
+  <link rel="stylesheet" type="text/css" href="shared/style/input_areas.css">
+  <link rel="stylesheet" type="text/css" href="shared/style/switches.css">
+  <link rel="stylesheet" type="text/css" href="shared/style/confirm.css">
+  <link rel="stylesheet" type="text/css" href="shared/style_unstable/progress_activity.css">
+  <link rel="stylesheet" type="text/css" href="shared/style_unstable/lists.css">
+  <link rel="stylesheet" type="text/css" href="shared/style/switches.css">
+  <link rel="stylesheet" type="text/css" href="shared/style/confirm.css">
+  <link rel="stylesheet" type="text/css" href="shared/style_unstable/progress_activity.css">
+  <link rel="stylesheet" type="text/css" href="/shared/style/action_menu.css">
+  <link rel="stylesheet" type="text/css" href="shared/style/responsive.css">
+  -->
+  <script src="scripts/lib/chord_table.js"></script>
+</head>
+<body ng-controller="MainCtrl">
+<section role="region">
+  <header>
+    <button><span class="icon icon-back">back</span></button>
+    <menu type="toolbar">
+      <button><span class="icon icon-user">user</span></button>
+    </menu>
+    <form action="#">
+      <input placeholder="search" required="required" type="text"
+             ng-model="chordName">
+      <button type="reset">Remove text</button>
+    </form>
+  </header>
+</section>
+
+<div class="container">
+  <div>
+    <div>
+      <div class="chord" size=".6"></div>
+      <div class="chord-list">
+        <div class="chord" ng-repeat="(k, v) in filterChords(chordTable)"
+             chordname="{{k}}" size=".18"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="scripts/lib/chord.js"></script>
+<script src="components/angular/angular.js"></script>
+
+<!-- build:js scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<!-- endbuild -->
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+  var _gaq = [
+    ['_setAccount', 'UA-XXXXX-X'],
+    ['_trackPageview']
+  ];
+  (function (d, t) {
+    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s)
+  }(document, 'script'));
+</script>
+</body>
+</html>
