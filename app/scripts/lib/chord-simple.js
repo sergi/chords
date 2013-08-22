@@ -1,46 +1,13 @@
 /*
- * Loosely based on Vex Guitar Chord Chart Renderer by
+ * Vex Guitar Chord Chart Renderer.
  * Mohit Muthanna Cheppudira -- http://0xfe.blogspot.com
  *
+ * Requires: Raphael JS (raphaeljs.com)
  */
 
 var svgns = "http://www.w3.org/2000/svg";
 
-function line(x, y, x2, y2, w) {
-  var line = document.createElementNS(svgns, "line");
-  line.setAttribute("x1", x);
-  line.setAttribute("y1", y);
-  line.setAttribute("x2", x2);
-  line.setAttribute("y2", y2);
-
-  if (w) {
-    line.setAttribute("stroke-width", w);
-  }
-
-  return line;
-}
-
-function circle(x, y, r) {
-  var circle = document.createElementNS(svgns, "circle");
-  circle.setAttribute("cx", x);
-  circle.setAttribute("cy", y);
-  circle.setAttribute("r", r);
-  circle.setAttribute("stroke", "#000");
-  circle.setAttribute("fill", "#fff");
-
-  return circle;
-}
-
-function text(x, y, text) {
-  var txt = document.createElementNS(svgns, "text");
-  txt.setAttribute("x", x);
-  txt.setAttribute("y", y);
-  txt.textContent = text;
-
-  return txt;
-}
-
-ChordBox = function(paper, x, y, width, height) {
+ChordBoxSimple = function (paper, x, y, width, height) {
   this.paper = paper;
   this.x = x;
   this.y = y;
@@ -71,13 +38,13 @@ ChordBox = function(paper, x, y, width, height) {
   this.bars = [];
 };
 
-ChordBox.prototype.setNumFrets = function(numFrets) {
+ChordBoxSimple.prototype.setNumFrets = function (numFrets) {
   this.numFrets = numFrets;
   this.fretSpacing = this.height / (this.numFrets + 1);
   return this;
 };
 
-ChordBox.prototype.setChord = function(chord, position, bars, postitionText) {
+ChordBoxSimple.prototype.setChord = function (chord, position, bars, postitionText) {
   this.chord = chord;
   this.position = position || 0;
   this.postitionText = postitionText || 0;
@@ -85,12 +52,12 @@ ChordBox.prototype.setChord = function(chord, position, bars, postitionText) {
   return this;
 };
 
-ChordBox.prototype.setPositionText = function(position) {
+ChordBoxSimple.prototype.setPositionText = function (position) {
   this.postitionText = position;
   return this;
 };
 
-ChordBox.prototype.draw = function() {
+ChordBoxSimple.prototype.draw = function () {
   var i;
   var spacing = this.spacing;
   var fs = this.fretSpacing;
@@ -144,6 +111,7 @@ ChordBox.prototype.draw = function() {
   }
   this.paper.appendChild(fretsEl);
 
+  /*
   // Draw tuning keys
   var tuningEl = document.createElementNS(svgns, "g");
   for (i = 0; i < this.tuning.length; ++i) {
@@ -156,6 +124,7 @@ ChordBox.prototype.draw = function() {
     tuningEl.appendChild(t);
   }
   this.paper.appendChild(tuningEl);
+  */
 
   // Draw chord
   for (i = 0; i < this.chord.length; ++i) {
@@ -170,7 +139,7 @@ ChordBox.prototype.draw = function() {
   }
 };
 
-ChordBox.prototype.lightUp = function(string_num, fret_num) {
+ChordBoxSimple.prototype.lightUp = function (string_num, fret_num) {
   string_num = this.numStrings - string_num;
 
   var shift_position = 0;
@@ -204,7 +173,7 @@ ChordBox.prototype.lightUp = function(string_num, fret_num) {
   return this;
 };
 
-ChordBox.prototype.lightBar = function(string_from, string_to, fret_num) {
+ChordBoxSimple.prototype.lightBar = function (string_from, string_to, fret_num) {
   if (this.position === 1 && this.postitionText === 1) {
     fret_num -= this.postitionText;
   }
