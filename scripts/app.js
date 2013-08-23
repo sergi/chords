@@ -17,6 +17,12 @@ angular.module('chordsApp', [])
   function(scope) {
     scope.chordTable = chordTable;
     scope.chordName = 'C';
+    scope.changeChord = function(chord) {
+      //scope.$apply(function () {
+      scope.chordName = chord;
+      //});
+    };
+
     scope.filterChords = function(chords) {
       var result = {};
       var value = scope.chordName;
@@ -50,6 +56,7 @@ angular.module('chordsApp', [])
           inputChord = chordTable[value];
           chord.setChord(inputChord[0], inputChord[1] || 1);
           chord.draw();
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
           name.textContent = capitalise(value);
         } else {
           scope.$watch('chordName', function(value) {
@@ -69,11 +76,34 @@ angular.module('chordsApp', [])
             ], inputChord[1] || 1);
 
             chord.draw();
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
           });
         }
       });
       element[0].appendChild(name);
       element[0].appendChild(canvas);
+    }
+  };
+}).directive('ngTap', function() {
+  var isTouch = !! ('ontouchstart' in window);
+  return function(scope, elm, attrs) {
+    // if there is no touch available, we'll fall back to click
+    if (isTouch) {
+      var tapping = false;
+      elm.bind('touchstart', function() {
+        tapping = true;
+      });
+      // prevent firing when someone is f.e. dragging
+      elm.bind('touchmove', function() {
+        tapping = false;
+      });
+      elm.bind('touchend', function() {
+        tapping && scope.$apply(attrs.ngTap);
+      });
+    } else {
+      elm.bind('click', function() {
+        scope.$apply(attrs.ngTap);
+      });
     }
   };
 });

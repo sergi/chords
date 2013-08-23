@@ -1,5 +1,5 @@
 {
-    "version": "0.5",
+    "version": "0.7",
     "name": "Chords",
     "description": "Easily find guitar chords by typing their names",
     "launch_path": "/chords/index.html",
